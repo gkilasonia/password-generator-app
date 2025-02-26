@@ -51,7 +51,7 @@ body {
   color: var(--Text);
   width: 100vw;
   height: 100vh;
-  padding: 17.06% 4.264% 0 4.264%;
+  padding: calc(67.75px - 1vw) 4.266% 0 4.266%;
 }
 
 main {
@@ -101,4 +101,190 @@ main {
 .main-container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  background-color: var(--Password-generator-background);
+  padding: 1rem;
+}
+
+.range-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.range-text-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.range-number {
+  font-size: 24px;
+  line-height: 1.3333;
+  color: #a4ffaf;
+}
+
+/* Input range bar */
+
+.range-bar {
+  appearance: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 8px;
+  height: 28px;
+}
+
+/* Chrome */
+
+.range-bar::-webkit-slider-runnable-track {
+  background: linear-gradient(
+    to right,
+    var(--Strenght-strong) 50%,
+    var(--Body-background) 50%
+  );
+  height: 8px;
+}
+
+/* Chrome */
+
+.range-bar::-webkit-slider-thumb {
+  appearance: none;
+  background-color: var(--Text);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-top: -9px;
+}
+
+/* Firefox and IE */
+
+.range-bar::-moz-range-thumb,
+.range-bar::-ms-thumb {
+  background-color: var(--Text);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.range-bar:focus::-moz-range-thumb,
+.range-bar:focus::-ms-thumb {
+  border: 2px solid var(--Strenght-strong);
+  background-color: var(--Body-background);
+}
+
+/* Checkbox section */
+
+.checkbox-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.checkbox {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--Text);
+  cursor: pointer;
+}
+
+.checkbox:checked {
+  border: none;
+  background-color: var(--Strenght-strong);
+  visibility: visible;
+}
+
+.checkmark {
+  position: absolute;
+  top: 6px;
+  left: 3px;
+  display: inherit;
+  cursor: pointer;
+}
+
+.checkbox-label {
+  position: relative;
+  line-height: 1.3125;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* Strenght gauge container */
+
+.strenght-gauge-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  background-color: var(--Body-background);
+}
+
+.strenght-header {
+  line-height: 1.3125;
+  color: var(--Header);
+}
+
+.strenght-level-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.strenght-text {
+  font-size: 18px;
+}
+
+.strenght-container {
+  display: flex;
+  gap: 8px;
+}
+
+.strenght {
+  width: 10px;
+  height: 28px;
+  border: 2px solid var(--Text);
+}
+
+/* Generate button */
+
+.generate-btn {
+  background-color: var(--Strenght-strong);
+  color: var(--Body-background);
+  font-family: var(--Bold);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 21px;
+  text-align: center;
+  border: none;
+  padding: 18px 0 17px 0;
+}
+
+.arrow {
+  margin-left: 16px;
+}
+
+/* Hover Effect */
+
+.range-bar:hover::-webkit-slider-thumb {
+  border: 2px solid var(--Strenght-strong);
+  background-color: var(--Body-background);
+}
+
+.generate-btn:hover {
+  background-color: var(--Body-background);
+  color: var(--Strenght-strong);
+  border: 2px solid var(--Strenght-strong);
+} /* Think how to change arrow color on hover */
+
+.copy-icon:hover {
+  /* Think how to change copy icon color on hover */
 }

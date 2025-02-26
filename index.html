@@ -30,37 +30,93 @@
       <!-- Main container -->
 
       <div class="main-container">
+        <!-- Range section -->
+
         <div class="range-section">
-          <div>
-            <p>Character Length</p>
-            <p>10</p>
+          <div class="range-text-container">
+            <label for="range-bar">Character Length</label>
+            <p class="range-number">10</p>
           </div>
-          <input type="range" name="" id="" />
+          <input
+            class="range-bar"
+            type="range"
+            name=""
+            id="range-bar"
+            min="4"
+            max="16"
+            step="1"
+          />
         </div>
+
+        <!-- Checkbox section -->
+
         <div class="checkbox-section">
-          <input type="checkbox" name="" id="" />
-          <label for="">Include Uppercase Letters</label>
-          <input type="checkbox" name="" id="" />
-          <label for="">Include Lowercase Letters</label>
-          <input type="checkbox" name="" id="" />
-          <label for="">Include Numbers</label>
-          <input type="checkbox" name="" id="" />
-          <label for="">Include Symbols</label>
+          <div class="checkbox-container">
+            <input class="checkbox" type="checkbox" id="checkbox-1" />
+            <img
+              class="checkmark"
+              src="./assets/images/icon-check.svg"
+              alt=""
+            />
+            <label class="checkbox-label" for="checkbox-1"
+              >Include Uppercase Letters
+            </label>
+          </div>
+          <div class="checkbox-container">
+            <input class="checkbox" type="checkbox" id="checkbox-2" /><img
+              class="checkmark"
+              src="./assets/images/icon-check.svg"
+              alt=""
+            />
+            <label class="checkbox-label" for="checkbox-2"
+              >Include Lowercase Letters</label
+            >
+          </div>
+          <div class="checkbox-container">
+            <input class="checkbox" type="checkbox" id="checkbox-3" /><img
+              class="checkmark"
+              src="./assets/images/icon-check.svg"
+              alt=""
+            />
+            <label class="checkbox-label" for="checkbox-3"
+              >Include Numbers</label
+            >
+          </div>
+          <div class="checkbox-container">
+            <input class="checkbox" type="checkbox" id="checkbox-4" /><img
+              class="checkmark"
+              src="./assets/images/icon-check.svg"
+              alt=""
+            />
+            <label class="checkbox-label" for="checkbox-4"
+              >Include Symbols</label
+            >
+          </div>
         </div>
-        <div>
-          <p>STRENGHT</p>
-          <div>
-            <p>MEDIUM</p>
-            <div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
+
+        <!-- Strenght gauge section -->
+
+        <div class="strenght-gauge-container">
+          <p class="strenght-header">STRENGHT</p>
+          <div class="strenght-level-container">
+            <p class="strenght-text">MEDIUM</p>
+            <div class="strenght-container">
+              <div class="strenght"></div>
+              <div class="strenght"></div>
+              <div class="strenght"></div>
+              <div class="strenght"></div>
             </div>
           </div>
         </div>
-        <button>
-          Generate<img src="assets/images/icon-arrow-right.svg" alt="" />
+
+        <!-- Generate button -->
+
+        <button class="generate-btn">
+          GENERATE<img
+            class="arrow"
+            src="assets/images/icon-arrow-right.svg"
+            alt=""
+          />
         </button>
       </div>
     </main>

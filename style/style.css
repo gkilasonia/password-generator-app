@@ -210,7 +210,6 @@ main {
 }
 
 .checkbox-label {
-  position: relative;
   line-height: 1.3125;
   user-select: none;
   cursor: pointer;
@@ -287,4 +286,76 @@ main {
 
 .copy-icon:hover {
   /* Think how to change copy icon color on hover */
+}
+
+@media only screen and (min-width: 577px) and (max-width: 1024px) {
+  body {
+    padding: calc(140.68px - 1vw) 14.843% 0 14.843%;
+  }
+
+  /* Header */
+
+  .generator-header {
+    font-size: 24px;
+    line-height: 1.3333;
+    margin-bottom: 16px;
+  }
+
+  /* Generated code bar */
+
+  .generated-code-container {
+    padding: 19px 32px;
+    margin-bottom: 8px;
+  }
+
+  .generated-code {
+    font-size: 32px;
+    line-height: 1.3125;
+    color: var(--Text);
+  }
+
+  .copy-btn {
+    height: 24px;
+  }
+
+  .copy-icon {
+    width: 21px;
+  }
+
+  /* Main container */
+
+  .main-container {
+    padding: 24px 32px 32px 32px;
+  }
+
+  .range-text-container {
+    font-size: 18px;
+    line-height: 1.3333;
+  }
+
+  .range-number {
+    font-size: 32px;
+    line-height: 1.3125;
+  }
+
+  /* Input range bar */
+
+  .range-bar {
+    margin-top: 16px;
+  }
+
+  /* Checkbox section */
+
+  .checkbox-section {
+    gap: 20px;
+  }
+
+  .checkbox-container {
+    gap: 24px;
+  }
+
+  .checkbox-label {
+    font-size: 18px;
+    line-height: 1.3334;
+  }
 }

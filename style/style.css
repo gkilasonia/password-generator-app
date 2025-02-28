@@ -3,24 +3,6 @@
   src: url("../assets/fonts/static/JetBrainsMono-Bold.ttf") format("truetype");
 }
 
-@font-face {
-  font-family: "JetBrainsMono-BoldItalic";
-  src: url("../assets/fonts/static/JetBrainsMono-BoldItalic.ttf")
-    format("truetype");
-}
-
-@font-face {
-  font-family: "JetBrainsMono-Italic-VariableFont";
-  src: url("../assets/fonts/JetBrainsMono-Italic-VariableFont_wght.ttf")
-    format("truetype");
-}
-
-@font-face {
-  font-family: "JetBrainsMono-VariableFont";
-  src: url("../assets/fonts/JetBrainsMono-VariableFont_wght.ttf")
-    format("truetype");
-}
-
 :root {
   /* COLORS */
   --Body-background: hsl(248, 15%, 11%);
@@ -34,9 +16,6 @@
 
   /* FONTS */
   --Bold: "JetBrainsMono-Bold", serif;
-  --Bold-italic: "JetBrainsMono-BoldItalic", serif;
-  --Variable: "JetBrainsMono-VariableFont", serif;
-  --Variable-italic: "JetBrainsMono-Italic-VariableFont", serif;
 }
 
 * {
@@ -86,6 +65,19 @@ main {
   color: var(--Text);
 }
 
+.copy-btn-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.copied-text {
+  display: none;
+  font-size: 18px;
+  line-height: 1.334;
+  color: var(--Strenght-strong);
+}
+
 .copy-btn {
   background-color: var(--Password-generator-background);
   border: none;
@@ -120,7 +112,7 @@ main {
 .range-number {
   font-size: 24px;
   line-height: 1.3333;
-  color: #a4ffaf;
+  color: var(--Strenght-strong);
 }
 
 /* Input range bar */
@@ -138,8 +130,10 @@ main {
 .range-bar::-webkit-slider-runnable-track {
   background: linear-gradient(
     to right,
-    var(--Strenght-strong) 50%,
-    var(--Body-background) 50%
+    var(--Strenght-strong) 0%,
+    var(--Strenght-strong) var(--range-value, 50%),
+    var(--Body-background) var(--range-value, 50%),
+    var(--Body-background) 100%
   );
   height: 8px;
 }
@@ -238,6 +232,7 @@ main {
 }
 
 .strenght-text {
+  visibility: hidden;
   font-size: 18px;
 }
 
@@ -282,10 +277,7 @@ main {
   background-color: var(--Body-background);
   color: var(--Strenght-strong);
   border: 2px solid var(--Strenght-strong);
-} /* Think how to change arrow color on hover */
-
-.copy-icon:hover {
-  /* Think how to change copy icon color on hover */
+  box-sizing: border-box;
 }
 
 @media only screen and (min-width: 577px) and (max-width: 1024px) {
@@ -297,7 +289,7 @@ main {
 
   .generator-header {
     font-size: 24px;
-    line-height: 1.3333;
+    line-height: 1.3334;
     margin-bottom: 16px;
   }
 
@@ -347,7 +339,7 @@ main {
   /* Checkbox section */
 
   .checkbox-section {
-    gap: 20px;
+    gap: 19px;
   }
 
   .checkbox-container {
@@ -356,6 +348,144 @@ main {
 
   .checkbox-label {
     font-size: 18px;
+    line-height: 24px;
+  }
+
+  /* Strenght gauge container */
+
+  .strenght-gauge-container {
+    padding: 21px 31.5px 20px 32px;
+    margin-bottom: 32px;
+  }
+
+  .strenght-header {
+    font-size: 18px;
+    line-height: 1.3333;
+  }
+
+  .strenght-level-container {
+    gap: 15.5px;
+  }
+
+  .strenght-text {
+    font-size: 24px;
+    line-height: 1.292;
+  }
+
+  /* Generate button */
+
+  .generate-btn {
+    font-size: 18px;
     line-height: 1.3334;
+    padding: 21px 0 20px 0;
+  }
+
+  .arrow {
+    margin-left: 24px;
+  }
+}
+
+@media only screen and (min-width: 1025px) {
+  body {
+    padding: calc(147.4px - 1vw) 31.25% 0 31.25%;
+  }
+
+  /* Header */
+
+  .generator-header {
+    font-size: 24px;
+    line-height: 1.3334;
+    margin-bottom: 16px;
+  }
+
+  /* Generated code bar */
+
+  .generated-code-container {
+    padding: 19px 32px;
+    margin-bottom: 8px;
+  }
+
+  .generated-code {
+    font-size: 32px;
+    line-height: 1.3125;
+    color: var(--Text);
+  }
+
+  .copy-btn {
+    height: 24px;
+  }
+
+  .copy-icon {
+    width: 21px;
+  }
+
+  /* Main container */
+
+  .main-container {
+    padding: 24px 32px 32px 32px;
+  }
+
+  .range-text-container {
+    font-size: 18px;
+    line-height: 1.3333;
+  }
+
+  .range-number {
+    font-size: 32px;
+    line-height: 1.3125;
+  }
+
+  /* Input range bar */
+
+  .range-bar {
+    margin-top: 16px;
+  }
+
+  /* Checkbox section */
+
+  .checkbox-section {
+    gap: 19px;
+  }
+
+  .checkbox-container {
+    gap: 24px;
+  }
+
+  .checkbox-label {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  /* Strenght gauge container */
+
+  .strenght-gauge-container {
+    padding: 21px 31.5px 20px 32px;
+    margin-bottom: 32px;
+  }
+
+  .strenght-header {
+    font-size: 18px;
+    line-height: 1.3333;
+  }
+
+  .strenght-level-container {
+    gap: 15.5px;
+  }
+
+  .strenght-text {
+    font-size: 24px;
+    line-height: 1.292;
+  }
+
+  /* Generate button */
+
+  .generate-btn {
+    font-size: 18px;
+    line-height: 1.3334;
+    padding: 21px 0 20px 0;
+  }
+
+  .arrow {
+    margin-left: 24px;
   }
 }

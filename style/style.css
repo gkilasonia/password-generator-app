@@ -31,6 +31,13 @@ body {
   width: 100vw;
   height: 100vh;
   padding: calc(67.75px - 1vw) 4.266% 0 4.266%;
+  overflow-x: hidden; /* Prevent scrolling */
+  scrollbar-width: none; /* Hide horizontal scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide horizontal scrollbar IE and Edge */
+}
+
+body::-webkit-scrollbar {
+  width: 0; /* Hide horizontal scrollbar Chrome */
 }
 
 main {
@@ -63,6 +70,7 @@ main {
   font-size: 24px;
   line-height: 1.33334;
   color: var(--Text);
+  opacity: 0.25;
 }
 
 .copy-btn-container {
@@ -199,9 +207,11 @@ main {
   position: absolute;
   top: 6px;
   left: 3px;
-  display: inherit;
+  display: none;
   cursor: pointer;
 }
+
+/* Make checkmark clickable and display none when it is not marked */
 
 .checkbox-label {
   line-height: 1.3125;
@@ -389,6 +399,8 @@ main {
   body {
     padding: calc(147.4px - 1vw) 31.25% 0 31.25%;
   }
+
+  /* make padding-top decreasable when  */
 
   /* Header */
 

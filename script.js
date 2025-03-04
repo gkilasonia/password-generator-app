@@ -7,233 +7,194 @@ const copiedText = document.getElementById("copied-text");
 const copyIcon = document.getElementById("copy-icon");
 const rangeNumber = document.getElementById("range-number");
 const rangeBar = document.getElementById("range-bar");
-const checkbox1 = document.getElementById("checkbox-1");
-const checkbox2 = document.getElementById("checkbox-2");
-const checkbox3 = document.getElementById("checkbox-3");
-const checkbox4 = document.getElementById("checkbox-4");
-const checkmark1 = document.getElementById("checkmark-1");
-const checkmark2 = document.getElementById("checkmark-2");
-const checkmark3 = document.getElementById("checkmark-3");
-const checkmark4 = document.getElementById("checkmark-4");
-const strenghtText = document.getElementById("strenght-text");
-const tooWeek = document.getElementById("too-week");
-const week = document.getElementById("week");
-const medium = document.getElementById("medium");
-const strong = document.getElementById("strong");
+const checkboxes = [
+  {
+    checkbox: document.getElementById("checkbox-1"),
+    checkmark: document.getElementById("checkmark-1"),
+    pool: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+  },
+  {
+    checkbox: document.getElementById("checkbox-2"),
+    checkmark: document.getElementById("checkmark-2"),
+    pool: "abcdefghijklmnopqrstuvwxyz",
+  },
+  {
+    checkbox: document.getElementById("checkbox-3"),
+    checkmark: document.getElementById("checkmark-3"),
+    pool: "0123456789",
+  },
+  {
+    checkbox: document.getElementById("checkbox-4"),
+    checkmark: document.getElementById("checkmark-4"),
+    pool: "!@#$%&",
+  },
+];
+const strengthText = document.getElementById("strenght-text");
+const strengthIndicators = {
+  tooWeek: document.getElementById("too-week"),
+  week: document.getElementById("week"),
+  medium: document.getElementById("medium"),
+  strong: document.getElementById("strong"),
+};
 const generateBtn = document.getElementById("generate-btn");
 const arrow = document.getElementById("arrow");
 
-const uppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const lovercaseLetters = "abcdefghijklmnopqrstuvwxyz";
-const numbers = "0123456789";
-const symbols = "!@#$%&";
-
-let codePool = "";
-
 function generateCode() {
-  // Build string based on checkbox status
+  let codePool = "";
+  let atLeastOneChecked = false;
 
-  if (checkbox1.checked === true) {
-    codePool += uppercaseLetters;
-  }
-  if (checkbox2.checked === true) {
-    codePool += lovercaseLetters;
-  }
-  if (checkbox3.checked === true) {
-    codePool += numbers;
-  }
-  if (checkbox4.checked === true) {
-    codePool += symbols;
+  checkboxes.forEach(({ checkbox, pool }) => {
+    if (checkbox.checked) {
+      codePool += pool;
+      atLeastOneChecked = true;
+    }
+  });
+
+  if (!atLeastOneChecked) {
+    generatedCode.textContent = "Check at least one option";
+    return;
   }
 
-  // generate the code based on the lenght of the range bar and the string built above randomly choosing characters from the string
-  let randomNumber = 0;
   let code = "";
   for (let i = 0; i < rangeBar.value; i++) {
-    randomNumber = Math.floor(Math.random() * codePool.length);
+    const randomNumber = Math.floor(Math.random() * codePool.length);
     code += codePool[randomNumber];
-    generatedCode.textContent = code;
-    console.log(`Random number: ${randomNumber}`);
-    console.log(`Generated code: ${code}`);
   }
-
-  console.log(`Generated code in function: ${codePool}`);
-  return codePool;
+  generatedCode.textContent = code;
 }
 
-// Rangebar
-
-rangeBar.addEventListener("input", function () {
+function updateRangeDisplay() {
   const value = rangeBar.value;
   rangeNumber.textContent = value;
   const percentage = (value / rangeBar.max) * 100;
   rangeBar.style.setProperty("--range-value", `${percentage}%`);
-  copiedText.style.display = "none"; // Hide text "Copied"
-});
+  copiedText.style.display = "none";
+}
 
-//  Checkbox Status
+function updateCheckmark(checkboxData) {
+  checkboxData.checkmark.style.display = checkboxData.checkbox.checked
+    ? "unset"
+    : "none";
+  copiedText.style.display = "none";
+}
 
-checkbox1.addEventListener("click", function () {
-  if (checkbox1.checked === false) {
-    checkmark1.style.display = "none";
+function checkStrength() {
+  const checkedCount = checkboxes.filter(
+    ({ checkbox }) => checkbox.checked
+  ).length;
+  const length = parseInt(rangeBar.value);
+
+  let strength = "";
+  let color = "";
+
+  if (checkedCount === 4 && length >= 14) {
+    strength = "STRONG";
+    color = "hsl(127, 100%, 82%)";
+  } else if (checkedCount > 0 && length >= 10) {
+    strength = "MEDIUM";
+    color = "hsl(42, 91%, 68%)";
+  } else if (checkedCount > 0 && length >= 6) {
+    strength = "WEEK";
+    color = "hsl(13, 95%, 66%)";
+  } else if (checkedCount > 0 && length < 6) {
+    strength = "TOO WEEK!";
+    color = "hsl(0, 91%, 63%)";
+  } else if (checkedCount === 0) {
+    alert("Please select at least one option");
+    return;
   } else {
-    checkmark1.style.display = "unset";
+    strengthText.style.visibility = "hidden";
+    Object.values(strengthIndicators).forEach((indicator) => {
+      indicator.style.backgroundColor = "unset";
+      indicator.style.border = "2px solid hsl(252, 11%, 91%)";
+    });
+    return;
   }
-  copiedText.style.display = "none"; // Hide text "Copied"
-});
 
-checkbox2.addEventListener("click", function () {
-  if (checkbox2.checked === false) {
-    checkmark2.style.display = "none";
-  } else {
-    checkmark2.style.display = "unset";
-  }
-  copiedText.style.display = "none"; // Hide text "Copied"
-});
+  strengthText.style.visibility = "unset";
+  strengthText.textContent = strength;
 
-checkbox3.addEventListener("click", function () {
-  if (checkbox3.checked === false) {
-    checkmark3.style.display = "none";
-  } else {
-    checkmark3.style.display = "unset";
-  }
-  copiedText.style.display = "none"; // Hide text "Copied"
-});
+  const indicatorKeys = Object.keys(strengthIndicators);
 
-checkbox4.addEventListener("click", function () {
-  if (checkbox4.checked === false) {
-    checkmark4.style.display = "none";
-  } else {
-    checkmark4.style.display = "unset";
-  }
-  copiedText.style.display = "none"; // Hide text "Copied"
-});
-
-// Strenght status
-
-function checkStrenght() {
-  if (
-    checkbox1.checked === true &&
-    checkbox2.checked === true &&
-    checkbox3.checked === true &&
-    checkbox4.checked === true &&
-    rangeBar.value >= 14
-  ) {
-    // Strong
-
-    strenghtText.style.visibility = "unset";
-    strenghtText.textContent = "STRONG";
-    tooWeek.style.backgroundColor = "hsl(127, 100%, 82%)";
-    tooWeek.style.border = "none";
-    week.style.backgroundColor = "hsl(127, 100%, 82%)";
-    week.style.border = "none";
-    medium.style.backgroundColor = "hsl(127, 100%, 82%)";
-    medium.style.border = "none";
-    strong.style.backgroundColor = "hsl(127, 100%, 82%)";
-    strong.style.border = "none";
-  } else if (
-    checkbox1.checked === true ||
-    checkbox2.checked === true ||
-    checkbox3.checked === true ||
-    checkbox4.checked === true ||
-    rangeBar.value >= 10
-  ) {
-    // Medium
-
-    strenghtText.style.visibility = "unset";
-    strenghtText.textContent = "MEDIUM";
-    tooWeek.style.backgroundColor = "hsl(42, 91%, 68%)";
-    tooWeek.style.border = "none";
-    week.style.backgroundColor = "hsl(42, 91%, 68%)";
-    week.style.border = "none";
-    medium.style.backgroundColor = "hsl(42, 91%, 68%)";
-    medium.style.border = "none";
-  } else if (
-    checkbox1.checked === true ||
-    checkbox2.checked === true ||
-    checkbox3.checked === true ||
-    checkbox4.checked === true ||
-    rangeBar.value >= 6
-  ) {
-    // Week
-
-    strenghtText.style.visibility = "unset";
-    strenghtText.textContent = "WEEK";
-    tooWeek.style.backgroundColor = "hsl(13, 95%, 66%)";
-    tooWeek.style.border = "none";
-    week.style.backgroundColor = "hsl(13, 95%, 66%)";
-    week.style.border = "none";
-  } else if (
-    checkbox1.checked === false &&
-    checkbox2.checked === false &&
-    checkbox3.checked === false &&
-    checkbox4.checked === false &&
-    rangeBar.value >= 6
-  ) {
-    // Too week
-
-    strenghtText.style.visibility = "unset";
-    strenghtText.textContent = "TOO WEEK!";
-    tooWeek.style.backgroundColor = "hsl(0, 91%, 63%)";
-    tooWeek.style.border = "none";
-  } else {
-    strenghtText.style.visibility = "hidden"; // Hide strenght text
+  for (let i = 0; i < indicatorKeys.length; i++) {
+    if (
+      (strength === "STRONG" && i < 4) ||
+      (strength === "MEDIUM" && i < 3) ||
+      (strength === "WEEK" && i < 2) ||
+      (strength === "TOO WEEK!" && i < 1)
+    ) {
+      strengthIndicators[indicatorKeys[i]].style.backgroundColor = color;
+      strengthIndicators[indicatorKeys[i]].style.border = "none";
+    } else {
+      strengthIndicators[indicatorKeys[i]].style.backgroundColor = "unset";
+      strengthIndicators[indicatorKeys[i]].style.border =
+        "2px solid hsl(252, 11%, 91%)";
+    }
   }
 }
 
-// Arrow hover effect
+async function copyTextToClipboard() {
+  try {
+    const text = document.getElementById("generated-code").innerText;
+    await navigator.clipboard.writeText(text);
+    console.log("Text copied to clipboards", text);
+  } catch (err) {
+    console.error("Failed to copy text: ", err);
+  }
+}
 
-generateBtn.addEventListener("mouseover", function () {
-  arrow.src = "assets/images/icon-arrow-right.png";
-});
-
-generateBtn.addEventListener("mouseout", function () {
-  arrow.src = "assets/images/icon-arrow-right.svg";
-});
-
-// Icon hover effect
-
-generatedCodeContainer.addEventListener("mouseover", function () {
-  copyIcon.src = "assets/images/icon-copy.png";
-});
-
-generatedCodeContainer.addEventListener("mouseout", function () {
-  copyIcon.src = "assets/images/icon-copy.svg";
-});
-
-// Click event
-
-copyBtn.addEventListener("click", function () {
-  rangeBar.value = 8; // Reset range bar value
-  rangeNumber.textContent = 8; // Reset range number value
-  rangeBar.style.setProperty("--range-value", "50%"); // Reset range bar value
-  checkbox1.checked = false; // Uncheck all checkboxes
-  checkbox2.checked = false; // Uncheck all checkboxes
-  checkbox3.checked = false; // Uncheck all checkboxes
-  checkbox4.checked = false; // Uncheck all checkboxes
-  // write logic for reseting strenght level
-  // write logic for copping text to clipboard
-  // write logic for setting generated code to default value
-  copiedText.style.display = "unset"; // Show text "Copied"
+function resetUI() {
+  copyTextToClipboard();
+  rangeBar.value = 10;
+  rangeNumber.textContent = 10;
+  rangeBar.style.setProperty("--range-value", "50%");
+  checkboxes.forEach(({ checkbox, checkmark }) => {
+    checkbox.checked = false;
+    checkmark.style.display = "none";
+  });
+  copiedText.style.display = "unset";
+  generatedCode.textContent = "P4$5W0rD!";
   generatedCode.style.opacity = "0.25";
   generatedCode.style.transition = "opacity 0.5s";
-  strenghtText.style.visibility = "hidden";
-  tooWeek.style.backgroundColor = "unset";
-  tooWeek.style.border = "2px solid hsl(252, 11%, 91%)";
-  week.style.backgroundColor = "unset";
-  week.style.border = "2px solid hsl(252, 11%, 91%)";
-  medium.style.backgroundColor = "unset";
-  medium.style.border = "2px solid hsl(252, 11%, 91%)";
-  strong.style.backgroundColor = "unset";
-  strong.style.border = "2px solid hsl(252, 11%, 91%)";
+  strengthText.style.visibility = "hidden";
+  Object.values(strengthIndicators).forEach((indicator) => {
+    indicator.style.backgroundColor = "unset";
+    indicator.style.border = "2px solid hsl(252, 11%, 91%)";
+  });
+}
+
+rangeBar.addEventListener("input", updateRangeDisplay);
+
+checkboxes.forEach((checkboxData) => {
+  checkboxData.checkbox.addEventListener("click", () =>
+    updateCheckmark(checkboxData)
+  );
 });
 
-// Generate BTN action
+generateBtn.addEventListener(
+  "mouseover",
+  () => (arrow.src = "assets/images/icon-arrow-right.png")
+);
+generateBtn.addEventListener(
+  "mouseout",
+  () => (arrow.src = "assets/images/icon-arrow-right.svg")
+);
 
-generateBtn.addEventListener("click", function () {
+generatedCodeContainer.addEventListener(
+  "mouseover",
+  () => (copyIcon.src = "assets/images/icon-copy.png")
+);
+generatedCodeContainer.addEventListener(
+  "mouseout",
+  () => (copyIcon.src = "assets/images/icon-copy.svg")
+);
+
+copyBtn.addEventListener("click", resetUI);
+
+generateBtn.addEventListener("click", () => {
   generateCode();
-  checkStrenght();
+  checkStrength();
   generatedCode.style.opacity = "unset";
   generatedCode.style.transition = "opacity 0.5s";
-  copiedText.style.display = "none"; // Hide text "Copied"
+  copiedText.style.display = "none";
 });

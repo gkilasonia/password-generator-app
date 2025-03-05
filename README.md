@@ -33,8 +33,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Add solution URL here](https://github.com/gkilasonia/password-generator-app)
+- Live Site URL: [Add live site URL here](https://kilasa-password-generator.netlify.app/)
 
 ## My process
 
@@ -52,5 +52,5 @@ Users should be able to:
 
 ## Author
 
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- LinkedIn - [@yourusername]()
+- Frontend Mentor - [@gkilasonia](https://www.frontendmentor.io/profile/gkilasonia)
+- LinkedIn - [@Giorgi Kilasonia](https://www.linkedin.com/in/giorgi-kilasonia-7a96ab190/)
